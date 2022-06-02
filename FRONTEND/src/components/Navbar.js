@@ -1,5 +1,5 @@
 import React from "react";
-
+import { HashLink } from 'react-router-hash-link';
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
@@ -19,9 +19,9 @@ export default function Navbar(props) {
                 (props.transparent ? "text-white" : "text-gray-800") +
                 " text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
               }
-              href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/presentation"
+              href="/"
             >
-              Tailwind Starter Kit
+              Job Reach
             </a>
             <button
               className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
@@ -45,25 +45,27 @@ export default function Navbar(props) {
           >
             <ul className="flex flex-col lg:flex-row list-none mr-auto">
               <li className="flex items-center">
-                <a
-                  className={
+           
+                  
+                  <HashLink
+                        className={
                     (props.transparent
                       ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                  href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/login"
-                >
-                  <i
+                        scroll={(el) => el.scrollIntoView({ behavior: 'smooth' })}
+                        to={'/#feedback'}
+                    >
+                        <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
                       " far fa-file-alt text-lg leading-lg mr-2"
                     }
-                  />{" "}
-                  Docs
-                </a>
+                  /> Contact us
+                    </HashLink>
               </li>
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
@@ -134,7 +136,7 @@ export default function Navbar(props) {
               </li>
 
               <li className="flex items-center">
-                <button
+                <a
                   className={
                     (props.transparent
                       ? "bg-white text-gray-800 active:bg-gray-100"
@@ -143,9 +145,11 @@ export default function Navbar(props) {
                   }
                   type="button"
                   style={{ transition: "all .15s ease" }}
+                  href ="/login"
                 >
-                  <i className="fas fa-arrow-alt-circle-down"></i> Download
-                </button>
+                  <i className="fas fa-arrow-alt-circle-down"></i> Login
+                </a>
+             
               </li>
             </ul>
           </div>
