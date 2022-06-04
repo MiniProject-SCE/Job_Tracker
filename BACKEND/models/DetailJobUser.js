@@ -26,6 +26,9 @@ const DetailJobUserSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  file: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("jobtracker", DetailJobUserSchema);

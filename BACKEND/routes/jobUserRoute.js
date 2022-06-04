@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 var fetchuser = require("../middleware/fetchuser");
+const upload = require("../routes/fileUpload");
 const DetailJobUser = require("../models/DetailJobUser");
 // const UploadUsers = require("../models/UploadDetail");
+const app = express();
+app.use("/uploads", express.static("uploads"));
 
 const { body, validationResult } = require("express-validator");
 
@@ -147,5 +150,29 @@ router.delete("/deleteuser/:id", fetchuser, async (req, res) => {
   }
 });
 
+//ROUTE 5 - Logged in  user details upload documents : POST "/api/userdetails/uploadDoc/:id
+router.post("/uploadDoc/:id", upload.array("file[]"), async (req, res) => {
+  const userpost = await DetailJobUser.findOne({ id: `${req.params.id}` });
+  if (req.files) {
+    let path = "";
+    req.files.forEach((files, index, arr) => {
+      path = path + files.path + ",";
+    });
+    path = path.substring(0, path.lastIndexOf(","));
+    userpost.file = path;
+    const savedPost = await userpost.save();
+    res.json(savedPost);
+  }
+});
+
+//ROUTE 6 - Logged in  user details to view documents : GET "/api/userdetails/uploadDoc/:id
+router.get("/uploadDoc/:id", async (req, res) => {
+  const userpost = await DetailJobUser.findone({ id: `${req.params.id}` });
+  if (userpost != null) {
+    res.json(userpost.files);
+  } else {
+    res.status(404).send("File not found");
+  }
+});
 
 module.exports = router;
