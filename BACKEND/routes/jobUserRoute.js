@@ -3,6 +3,7 @@ const router = express.Router();
 var fetchuser = require("../middleware/fetchuser");
 const upload = require("../routes/fileUpload");
 const DetailJobUser = require("../models/DetailJobUser");
+const ApplicationJobUser = require("../models/Applications");
 // const UploadUsers = require("../models/UploadDetail");
 const app = express();
 app.use("/uploads", express.static("uploads"));
@@ -174,5 +175,49 @@ router.get("/uploadDoc/:id", async (req, res) => {
     res.status(404).send("File not found");
   }
 });
+//ROUTE 5- Logged in  user details
+router.post(
+  "/addApplication",
+  fetchuser,
+  [
+    // body("dob", "Enter a valid DateofBirth").isDate(),
+    body("title", "Enter a valid Name").isLength({ min: 3 }),
+    body("description", "Enter a valid description").isLength({ min: 6 }),
+    body("usernameUsed", "Enter a valid userName").isLength({ min: 3 }),
+    body("pwdUsed", "Enter a valid Password").isLength({ min: 3 }),
+  ],
+  async (req, res) => {
+    try {
+      console.log("hai");
+      console.log(req.user.id);
+      const { title, description, usernameUsed, pwdUsed } = req.body;
+      //if there are errors, return bad request
+      const errors = validationResult(req);
 
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+      //   console.log(req.user.id);
+      // console.log(req.users.id);
+
+      const userdet = new ApplicationJobUser({
+        user: req.user.id,
+        // user:req.user.id,
+        title,
+        description,
+        usernameUsed,
+        pwdUsed,
+      });
+
+      console.log(userdet);
+
+      const saveduser = await userdet.save();
+
+      res.json([saveduser]);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+);
 module.exports = router;
