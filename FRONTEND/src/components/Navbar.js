@@ -69,25 +69,44 @@ export default function Navbar(props) {
               </li>
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="flex items-center">
+            <li className="flex items-center">
                 <a
-                  className={
+                    className={
                     (props.transparent
                       ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                  href="#pablo"
-                >
-                  <i
+                  href = "/documents"
+                    >
+                        <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
-                      " fab fa-facebook text-lg leading-lg "
+                      " far fa-file-alt text-lg leading-lg mr-2"
                     }
-                  />
-                  <span className="lg:hidden inline-block ml-2">Share</span>
+                  /> Documents
+                </a>
+              </li>
+              <li className="flex items-center">
+                <a
+                    className={
+                    (props.transparent
+                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                      : "text-gray-800 hover:text-gray-600") +
+                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                  }
+                  href = "/notes"
+                    >
+                        <i
+                    className={
+                      (props.transparent
+                        ? "lg:text-gray-300 text-gray-500"
+                        : "text-gray-500") +
+                      " far fa-file-alt text-lg leading-lg mr-2"
+                    }
+                  /> Notes
                 </a>
               </li>
 
@@ -99,41 +118,40 @@ export default function Navbar(props) {
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                  href="#pablo"
+                  href="/mycontacts"
                 >
                   <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
-                      " fab fa-twitter text-lg leading-lg "
+                      " far fa-file-alt text-lg leading-lg "
                     }
                   />
-                  <span className="lg:hidden inline-block ml-2">Tweet</span>
+                   Contacts
                 </a>
               </li>
-
               <li className="flex items-center">
                 <a
-                  className={
+                    className={
                     (props.transparent
                       ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                  href="#pablo"
-                >
-                  <i
+                  href = "/profile"
+                    >
+                        <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
-                      " fab fa-github text-lg leading-lg "
+                      " far fa-file-alt text-lg leading-lg mr-2"
                     }
-                  />
-                  <span className="lg:hidden inline-block ml-2">Star</span>
+                  /> Profile
                 </a>
               </li>
+           
 
               <li className="flex items-center">
                 <a
