@@ -182,16 +182,23 @@ router.post(
   fetchuser,
   [
     // body("dob", "Enter a valid DateofBirth").isDate(),
+    body("company", "Enter a valid Company Name").isLength({ min: 3 }),
+    body("salary", "Enter a valid Salary").isLength({ min: 3 }),
     body("title", "Enter a valid Name").isLength({ min: 3 }),
     body("description", "Enter a valid description").isLength({ min: 6 }),
     body("usernameUsed", "Enter a valid userName").isLength({ min: 3 }),
     body("pwdUsed", "Enter a valid Password").isLength({ min: 3 }),
+    body("urlUsed", "Enter a valid Url").isLength({ min: 3 }),
+    body("deadLine", "Enter a valid DeadLine").isLength({ min: 3 }),
+    body("interviewDate", "Enter a valid Interview Date").isLength({ min: 3 }),
+    body("category", "Enter a valid Category").isLength({ min: 3 }),
+    body("location", "Enter a valid Location").isLength({ min: 3 }),
   ],
   async (req, res) => {
     try {
       console.log("hai");
       console.log(req.user.id);
-      const { title, description, usernameUsed, pwdUsed } = req.body;
+      const { company, salary, title, description, usernameUsed, pwdUsed, deadLine, interviewDate, category, location,urlUsed } = req.body;
       //if there are errors, return bad request
       const errors = validationResult(req);
 
@@ -203,11 +210,17 @@ router.post(
 
       const userdet = new ApplicationJobUser({
         user: req.user.id,
-        // user:req.user.id,
+        company,
+        salary,
         title,
         description,
         usernameUsed,
         pwdUsed,
+        deadLine,
+        interviewDate,
+        category,
+        location,
+        urlUsed
       });
 
       console.log(userdet);

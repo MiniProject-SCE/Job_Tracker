@@ -28,10 +28,18 @@ export default function JobActivityAdd(props) {
           <InputBox title="Deadline" type="date" textHandler={handleForm} />
           <InputBox title="Interview" type="date" textHandler={handleForm} />
           <InputBox title="Location" type="text" textHandler={handleForm} />
-         <SelectInputBox title = "Category"/>
+          <InputBox title="UserName Used" type="text" textHandler={handleForm}/>
+          <InputBox
+            title="Password Used"
+            type="text"
+            textHandler={handleForm}
+          />
+          <InputBox title="Url Used" type="text" textHandler={handleForm} />
+
+          <SelectInputBox title="Category" />
         </div>
         <div className="buttons">
-          <Button name="Cancel" onClick = {() => props.setModalOpen(false)}/>
+          <Button name="Cancel" onClick={() => props.setModalOpen(false)} />
           <Button name="Submit" />
         </div>
       </form>
