@@ -4,6 +4,7 @@ var fetchuser = require("../middleware/fetchuser");
 const upload = require("../routes/fileUpload");
 const DetailJobUser = require("../models/DetailJobUser");
 const ApplicationJobUser = require("../models/Applications");
+const NotesUser = require("../models/Notes");
 // const UploadUsers = require("../models/UploadDetail");
 const app = express();
 app.use("/uploads", express.static("uploads"));
@@ -170,7 +171,7 @@ router.post("/uploadDoc/:id", upload.array("file[]"), async (req, res) => {
 router.get("/uploadDoc/:id", async (req, res) => {
   const userpost = await DetailJobUser.findone({ id: `${req.params.id}` });
   if (userpost != null) {
-    res.json(userpost.files);
+    res.json(userpost.file);
   } else {
     res.status(404).send("File not found");
   }
@@ -220,4 +221,17 @@ router.post(
     }
   }
 );
+
+//ROUTE 7 - Notes for user : POST "/api/jobtracker/notes/:id
+router.post("/notes/:id", async (req, res) => {
+  const { title, description } = req.body;
+  const userdet = new NotesUser({
+    user: req.user.id,
+    title,
+    description,
+  });
+  const savedPost = await userdet.save();
+  res.json(savedPost);
+});
+
 module.exports = router;
