@@ -20,9 +20,7 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/jobtracker", require("./routes/jobUserRoute"));
 
 app.listen(port, () => {
-  console.log(
-    `HEALTH TRACKER BACKEND app listening at http://localhost:${port}`
-  );
+  console.log(`JOB TRACKER BACKEND app listening at http://localhost:${port}`);
 });
 
 connectToMongo();

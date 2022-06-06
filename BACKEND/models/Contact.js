@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const DetailJobUserSchema = new Schema({
+const ContactJobUserSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "jobtrackeruser",
@@ -10,29 +10,34 @@ const DetailJobUserSchema = new Schema({
     type: String,
     required: true,
   },
-  mobileno: {
-    type: String,
-    required: true,
-  },
   designation: {
     type: String,
     required: true,
   },
-  working: {
+  location: {
     type: String,
     required: true,
   },
-  about: {
+  phoneno: {
     type: String,
     required: true,
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  file: {
+  email: {
     type: String,
+    required: true,
+  },
+  linkedin: {
+    type: String,
+    required: true,
+  },
+  github: {
+    type: String,
+    required: true,
+  },
+  portfolio: {
+    type: String,
+    required: true,
   },
 });
 
-module.exports = mongoose.model("jobtracker", DetailJobUserSchema);
+module.exports = mongoose.model("contact", ContactJobUserSchema);
