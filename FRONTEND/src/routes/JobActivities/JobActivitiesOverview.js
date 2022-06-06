@@ -4,6 +4,9 @@ import JobActivityCard from "./JobActivityCard/JobActivityCard";
 import JobActivityEdit from "./JobActivityEdit/JobActivityEdit";
 import JobActivityAdd from "./JobActivityAdd/JobActivityAdd";
 import Navbar from "../../components/Navbar";
+import SelectInputBox from "../../components/SelectInputBox";
+const categories = ['Wishlist', 'Applied', 'Rejected']
+
 export default function JobActivitiesOverview() {
   const [isModalOpen, setModalOpen] = useState(false);
   return (
@@ -16,6 +19,7 @@ export default function JobActivitiesOverview() {
         >
           + Add Job
         </button>
+        <SelectInputBox title = "Category" data= {categories}/>
         <JobActivityCard />
       </div>
       {isModalOpen ? <JobActivityAdd setModalOpen={setModalOpen} /> : null}

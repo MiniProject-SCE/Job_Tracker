@@ -15,6 +15,14 @@ export default function Notes() {
           + Add Notes
         </button>
       </div>
+      {/* <div className={`bg-[${color}]-500 rounded shadow border p-6 w-64`}>
+        <h5 className="text-3xl font-bold mb-4 mt-0">My Title</h5>
+        <p className="text-gray-700 text-sm">Content goes here</p>
+      </div> */}
+      <div className={`bg-white rounded shadow border p-6 w-64`}>
+        <h5 className="text-3xl font-bold mb-4 mt-0">My Title</h5>
+        <p className="text-gray-700 text-sm">Content goes here</p>
+      </div>
       {isModalOpen ? <NoteAdd setModalOpen={setModalOpen} /> : null}
     </div>
   );

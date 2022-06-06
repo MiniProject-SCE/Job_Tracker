@@ -4,6 +4,8 @@ import Button from "../../../components/Button";
 import InputBox from "../../../components/InputBox";
 import SelectInputBox from "../../../components/SelectInputBox";
 import "./JobActivityEdit.css";
+const categories = ["Wishlist", "Applied", "Rejected"];
+
 export default function JobActivityEdit(props) {
   const handleForm = (e) => {
     console.log(e);
@@ -21,14 +23,23 @@ export default function JobActivityEdit(props) {
           Job Details
         </h1>
         <div className="inputboxes m-7">
-          <InputBox title="Company" type="text" textHandler={handleForm} />
+        <InputBox title="Company" type="text" textHandler={handleForm} />
           <InputBox title="Job Title" type="text" textHandler={handleForm} />
           <InputBox title="Salary" type="text" textHandler={handleForm} />
-          <InputBox title="Description" type="text" textHandler={handleForm} />
+          <InputBox title="Location" type="text" textHandler={handleForm} />
           <InputBox title="Deadline" type="date" textHandler={handleForm} />
           <InputBox title="Interview" type="date" textHandler={handleForm} />
           <InputBox title="Location" type="text" textHandler={handleForm} />
-         <SelectInputBox title = "Category"/>
+          <InputBox title="Website Url" type="text" textHandler={handleForm} />
+          <InputBox title="Website's UserName" type="text" textHandler={handleForm}/>
+          <InputBox
+            title="Website's Password"
+            type="text"
+            textHandler={handleForm}
+          />
+          
+          <InputBox title="Description" type="text" textHandler={handleForm} />
+          <SelectInputBox title="Category" data={categories} />
         </div>
         <div className="buttons">
           <Button name="Cancel" onClick = {() => props.setModalOpen(false)}/>

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./routes/Landing.js";
 import Login from "./routes/Login.js";
 import SignUp from "./routes/SignUp.js";
-import Profile from "./routes/Profile.js";
+import Profile from "./routes/Profile/Profile.js";
 import JobActivitiesOverview from "./routes/JobActivities/JobActivitiesOverview.js";
 import NotesApp from "./routes/notes/Notes.js";
 import MyContacts from "./routes/MyContacts/MyContacts.js";

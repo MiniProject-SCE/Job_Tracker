@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import ContactAdd from "./ContactAdd/ContactAdd";
+import ContactCard from "./ContactCard/ContactCard";
 export default function JobActivitiesOverview() {
   const [isModalOpen, setModalOpen] = useState(false);
   return (
@@ -14,6 +15,7 @@ export default function JobActivitiesOverview() {
         >
           + Add Contact
         </button>
+        <ContactCard />
       </div>
       {isModalOpen ? <ContactAdd setModalOpen={setModalOpen} /> : null}
     </div>

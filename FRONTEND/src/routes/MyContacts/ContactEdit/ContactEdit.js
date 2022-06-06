@@ -2,19 +2,19 @@ import React from "react";
 import Modal from "react-modal";
 import Button from "../../../components/Button";
 import InputBox from "../../../components/InputBox";
-import "./ContactAdd.css";
-export default function ContactAdd(props) {
+import "./ContactEdit.css";
+export default function ContactEdit(props) {
   const handleForm = (e) => {
     console.log(e);
   };
   return (
     <Modal
-      className="contactAdd"
+      className="contactEdit"
       isOpen={true}
       onRequestClose={() => props.setModalOpen(false)}
       ariaHideApp={false}
       overlayClassName="overlay"
-    >     <form className="contactAddForm">
+    >     <form className="contactForm">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center m-5">
           Contact Details
         </h1>
