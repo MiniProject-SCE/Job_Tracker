@@ -5,10 +5,32 @@ import JobActivityEdit from "./JobActivityEdit/JobActivityEdit";
 import JobActivityAdd from "./JobActivityAdd/JobActivityAdd";
 import Navbar from "../../components/Navbar";
 import SelectInputBox from "../../components/SelectInputBox";
-const categories = ['Wishlist', 'Applied', 'Rejected']
+import axios from "axios";
+const categories = ["Wishlist", "Applied", "Rejected"];
 
 export default function JobActivitiesOverview() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [jobApplications, setJobApplications] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:5000/api/jobtracker/getApplication", {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          setJobApplications(...res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
+  }, []);
+  console.log(jobApplications)
   return (
     <div>
       <Navbar />
@@ -19,8 +41,12 @@ export default function JobActivitiesOverview() {
         >
           + Add Job
         </button>
-        <SelectInputBox title = "Category" data= {categories}/>
-        <JobActivityCard />
+        <SelectInputBox title="Category" data={categories} />
+        <div className="flex flex-wrap">
+          {jobApplications.map((job) => (
+            <JobActivityCard data={job} />
+          ))}
+        </div>
       </div>
       {isModalOpen ? <JobActivityAdd setModalOpen={setModalOpen} /> : null}
     </div>

@@ -3,8 +3,24 @@ import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import ContactAdd from "./ContactAdd/ContactAdd";
 import ContactCard from "./ContactCard/ContactCard";
-export default function JobActivitiesOverview() {
+import axios from "axios"
+export default function MyContacts() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [myContacts, setMyContacts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await axios
+                .get('http://localhost:5000/api/jobtracker/getContacts')
+                .then((res) => {
+                  setMyContacts(...res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+        fetchData();
+    }, []);
   return (
     <div>
       <Navbar />
@@ -15,6 +31,11 @@ export default function JobActivitiesOverview() {
         >
           + Add Contact
         </button>
+        <div className="flex flex-wrap">
+          {myContacts.map((job) => (
+            <ContactCard  data={job} />
+          ))}
+        </div>
         <ContactCard />
       </div>
       {isModalOpen ? <ContactAdd setModalOpen={setModalOpen} /> : null}

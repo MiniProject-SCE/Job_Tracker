@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import bg from "../../assets/img/19873.jpg"
 import Navbar from "../../components/Navbar";
 import ProfileAdd from "./ProfileEdit/ProfileEdit";
-
+import axios from "axios";
 export default function Profile() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [profile, setProfile] = useState();
+
+  useEffect(() => {
+      const fetchData = async () => {
+          await axios
+              .get('http://localhost:5000/api/jobtracker/getUser')
+              .then((res) => {
+                setProfile(res.data);
+              })
+              .catch((err) => {
+                  console.log(err);
+              });
+      };
+      fetchData();
+  }, []);
   return (
     <>
       <Navbar transparent />

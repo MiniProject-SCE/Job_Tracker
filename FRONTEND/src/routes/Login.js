@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import bg from "../assets/img/19873.jpg";
 import Navbar from "../components/Navbar.js";
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
@@ -11,8 +11,10 @@ export default function Login() {
     console.log(e.target.value);
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
     console.log("email:" + credentials.email);
     console.log("password:" + credentials.password);
     let url = "http://localhost:5000/api/auth/loginuser";
@@ -39,7 +41,7 @@ export default function Login() {
       let data = await response.data;
       console.log("data is :" + data.authtoken);
       localStorage.setItem("token", data.authtoken);
-      // history.push("/");
+      navigate("/activities");
     }
   };
   return (

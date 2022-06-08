@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import Button from "../../../components/Button";
 import InputBox from "../../../components/InputBox";
@@ -7,9 +7,13 @@ import "./JobActivityEdit.css";
 const categories = ["Wishlist", "Applied", "Rejected"];
 
 export default function JobActivityEdit(props) {
-  const handleForm = (e) => {
-    console.log(e);
-  };
+  const jobInfo = props.data;
+  const [inputs, setInputs] = useState({});
+  const handleChange = (e) =>
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   return (
     <Modal
       className="jobEdit"
@@ -23,26 +27,81 @@ export default function JobActivityEdit(props) {
           Job Details
         </h1>
         <div className="inputboxes m-7">
-        <InputBox title="Company" type="text" textHandler={handleForm} />
-          <InputBox title="Job Title" type="text" textHandler={handleForm} />
-          <InputBox title="Salary" type="text" textHandler={handleForm} />
-          <InputBox title="Location" type="text" textHandler={handleForm} />
-          <InputBox title="Deadline" type="date" textHandler={handleForm} />
-          <InputBox title="Interview" type="date" textHandler={handleForm} />
-          <InputBox title="Location" type="text" textHandler={handleForm} />
-          <InputBox title="Website Url" type="text" textHandler={handleForm} />
-          <InputBox title="Website's UserName" type="text" textHandler={handleForm}/>
+          <InputBox
+            title="Company"
+            name="company"
+            value={jobInfo.company}
+            type="text"
+            textHandler={handleChange}
+          />
+          <InputBox
+            title="Job Title"
+            name="jobtitle"
+            value={jobInfo.title}
+            type="text"
+            textHandler={handleChange}
+          />
+          <InputBox
+            title="Salary"
+            Z
+            name="salary"
+            value={jobInfo.salary}
+            type="text"
+            textHandler={handleChange}
+          />
+          <InputBox
+            title="Location"
+            name="location"
+            value={jobInfo.location}
+            type="text"
+            textHandler={handleChange}
+          />
+          <InputBox
+            title="Deadline"
+            name="deadline"
+            value={jobInfo.deadline}
+            type="date"
+            textHandler={handleChange}
+          />
+          <InputBox
+            title="Interview"
+            name="interview"
+            value={jobInfo.interviewDate}
+            type="date"
+            textHandler={handleChange}
+          />
+          <InputBox
+            title="Website Url"
+            name="websiteUrl"
+            value={jobInfo.urlUsed}
+            type="text"
+            textHandler={handleChange}
+          />
+
+          <InputBox
+            title="Website's UserName"
+            value={jobInfo.usernameUsed}
+            type="text"
+            textHandler={handleChange}
+          />
           <InputBox
             title="Website's Password"
             type="text"
-            textHandler={handleForm}
+            value={jobInfo.pwdUsed}
+            textHandler={handleChange}
           />
-          
-          <InputBox title="Description" type="text" textHandler={handleForm} />
-          <SelectInputBox title="Category" data={categories} />
+           <SelectInputBox title="Category" data={categories} />
+          <InputBox
+            title="Description"
+            name="description"
+            value={jobInfo.description}
+            type="text"
+            textHandler={handleChange}
+          />
+         
         </div>
         <div className="buttons">
-          <Button name="Cancel" onClick = {() => props.setModalOpen(false)}/>
+          <Button name="Cancel" onClick={() => props.setModalOpen(false)} />
           <Button name="Submit" />
         </div>
       </form>

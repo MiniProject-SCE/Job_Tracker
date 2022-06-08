@@ -11,8 +11,8 @@ const SelectInputBox = ({
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
         {title}
       </label>
-      <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
-        {data.map((value) =><option value = {value}>{value}</option>)}
+      <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+        {data.map((value,key) =><option key={key} value = {value}>{value}</option>)}
       </select>
     </div>
   );

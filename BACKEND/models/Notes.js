@@ -14,6 +14,9 @@ const NotesSchema = new Schema({
     type: String,
     required: true,
   },
+  color: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("notes", NotesSchema);

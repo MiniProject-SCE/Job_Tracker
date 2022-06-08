@@ -4,9 +4,6 @@ import Button from "../../../components/Button";
 
 import "./NoteAdd.css";
 export default function NoteAdd(props) {
-  const handleForm = (e) => {
-    console.log(e);
-  };
   return (
     <Modal
       className="noteAdd"
