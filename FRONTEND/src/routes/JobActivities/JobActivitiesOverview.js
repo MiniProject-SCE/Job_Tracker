@@ -30,7 +30,6 @@ export default function JobActivitiesOverview() {
     };
     fetchData();
   }, []);
-  console.log(jobApplications)
   return (
     <div>
       <Navbar />
@@ -44,7 +43,7 @@ export default function JobActivitiesOverview() {
         <SelectInputBox title="Category" data={categories} />
         <div className="flex flex-wrap">
           {jobApplications.map((job) => (
-            <JobActivityCard data={job} />
+            <JobActivityCard data={job} key={job._id} />
           ))}
         </div>
       </div>

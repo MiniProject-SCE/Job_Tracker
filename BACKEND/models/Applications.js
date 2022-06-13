@@ -12,7 +12,6 @@ const ApplicationJobUserSchema = new Schema({
   },
   salary: {
     type: String,
-    required: true,
   },
   title: {
     type: String,
@@ -20,35 +19,27 @@ const ApplicationJobUserSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   usernameUsed: {
     type: String,
-    required: true,
   },
   pwdUsed: {
     type: String,
-    required: true,
   },
   urlUsed: {
     type: String,
-    required: true,
   },
   deadLine: {
     type: String,
-    required: true,
   },
   interviewDate: {
     type: String,
-    required: true,
   },
   category: {
     type: String,
-    required: true,
   },
   location: {
     type: String,
-    required: true,
   },
   date: {
     type: Date,

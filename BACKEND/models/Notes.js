@@ -16,6 +16,7 @@ const NotesSchema = new Schema({
   },
   color: {
     type: String,
+    default: "pink",
   },
 });
 

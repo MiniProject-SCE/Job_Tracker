@@ -21,18 +21,9 @@ router.get("/getContacts", fetchuser, async (req, res) => {
     fetchuser,
     [
       body("name", "Enter a valid Name").isLength({ min: 3 }),
-      body("designation", "Enter a valid Designation").isLength({ min: 3 }),
-      body("location", "Enter a valid Location").isLength({ min: 3 }),
-      body("phoneno", "Enter a valid Phone No").isLength({ min: 3 }),
-      body("email", "Enter a valid Email").isLength({ min: 3 }),
-      body("linkedin", "Enter a valid LinkedIn url").isLength({ min: 3 }),
-      body("github", "Enter a valid Github url").isLength({ min: 3 }),
-      body("portfolio", "Enter a valid Portfolio").isLength({ min: 3 }),
     ],
     async (req, res) => {
       try {
-        console.log("hai");
-        console.log(req.user.id);
         const {
           name,
           designation,
@@ -61,8 +52,6 @@ router.get("/getContacts", fetchuser, async (req, res) => {
           github,
           portfolio,
         });
-  
-        console.log(userdet);
   
         const saveduser = await userdet.save();
   

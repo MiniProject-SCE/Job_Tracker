@@ -3,24 +3,30 @@ import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import ContactAdd from "./ContactAdd/ContactAdd";
 import ContactCard from "./ContactCard/ContactCard";
-import axios from "axios"
+import axios from "axios";
 export default function MyContacts() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [myContacts, setMyContacts] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await axios
-                .get('http://localhost:5000/api/jobtracker/getContacts')
-                .then((res) => {
-                  setMyContacts(...res.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
-        fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:5000/api/jobtracker/getContacts", {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          setMyContacts(...res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
+  }, []);
+  
   return (
     <div>
       <Navbar />
@@ -32,11 +38,10 @@ export default function MyContacts() {
           + Add Contact
         </button>
         <div className="flex flex-wrap">
-          {myContacts.map((job) => (
-            <ContactCard  data={job} />
+          {myContacts.map((contact) => (
+            <ContactCard data={contact} />
           ))}
         </div>
-        <ContactCard />
       </div>
       {isModalOpen ? <ContactAdd setModalOpen={setModalOpen} /> : null}
     </div>

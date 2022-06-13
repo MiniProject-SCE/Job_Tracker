@@ -9,18 +9,25 @@ export default function Notes() {
   const [myNotes, setMyNotes] = useState([]);
 
   useEffect(() => {
-      const fetchData = async () => {
-          await axios
-              .get('http://localhost:5000/api/jobtracker/notes')
-              .then((res) => {
-                setMyNotes(...res.data);
-              })
-              .catch((err) => {
-                  console.log(err);
-              });
-      };
-      fetchData();
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:5000/api/jobtracker/notes", {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          setMyNotes(...res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
   }, []);
+
+  console.log(myNotes);
   return (
     <div>
       <Navbar />
@@ -32,10 +39,12 @@ export default function Notes() {
           + Add Notes
         </button>
       </div>
-     <div>
-       {myNotes.map((note) => <NotesCard  note= {note}/> )}
-     </div>
-  
+      <div className="flex flex-wrap">
+        {myNotes.map((note) => (
+          <NotesCard note={note} />
+        ))}
+      </div>
+
       {isModalOpen ? <NoteAdd setModalOpen={setModalOpen} /> : null}
     </div>
   );

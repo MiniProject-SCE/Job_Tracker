@@ -12,31 +12,24 @@ const ContactJobUserSchema = new Schema({
   },
   designation: {
     type: String,
-    required: true,
   },
   location: {
     type: String,
-    required: true,
   },
   phoneno: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
-    required: true,
   },
   linkedin: {
     type: String,
-    required: true,
   },
   github: {
     type: String,
-    required: true,
   },
   portfolio: {
     type: String,
-    required: true,
   },
 });
 

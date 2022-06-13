@@ -9,16 +9,14 @@ const categories = ["Wishlist", "Applied", "Rejected"];
 
 export default function JobActivityAdd(props) {
   const [inputs, setInputs] = useState({});
-  const [jobApplications, setJobApplications] = useState([]);
+
   const handleChange = (e) =>
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-
-function JobPost (){
-  console.log("postcalling")
-   axios
+  function JobPost() {
+    axios
       .post(
         "http://localhost:5000/api/jobtracker/addApplication",
         {
@@ -33,15 +31,20 @@ function JobPost (){
           category: inputs.Wusername,
           location: inputs.location,
           urlUsed: inputs.websiteUrl,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
         }
       )
-      .then((res) => {
-        setJobApplications(...res.data);
-       
+      .then(() => {
         window.alert("Job Added Successfully");
+        props.setModalOpen(false);
+        window.location.reload();
       });
   }
-  console.log(jobApplications)
   return (
     <Modal
       className="jobAdd"
@@ -50,11 +53,11 @@ function JobPost (){
       ariaHideApp={false}
       overlayClassName="overlay"
     >
-      <form className="jobAddForm" onSubmit={JobPost} >
+      <div className="jobAddForm">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center m-5">
           Job Details
         </h1>
-        <div className="inputboxes m-7">
+        <div className="inputboxes m-7 ">
           <InputBox
             title="Company"
             name="company"
@@ -118,7 +121,12 @@ function JobPost (){
             value={inputs.Wpassword}
             textHandler={handleChange}
           />
-          <SelectInputBox title="Category" name="category" data={categories} />
+          <SelectInputBox
+            title="Category"
+            name="category"
+            data={categories}
+            textHandler={handleChange}
+          />
           <InputBox
             title="Description"
             name="description"
@@ -129,9 +137,9 @@ function JobPost (){
         </div>
         <div className="buttons">
           <Button name="Cancel" onClick={() => props.setModalOpen(false)} />
-          <Button name="Submit" type="submit"/>
+          <Button name="Submit" onClick={() => JobPost()} />
         </div>
-      </form>
+      </div>
     </Modal>
   );
 }

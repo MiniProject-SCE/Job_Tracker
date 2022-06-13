@@ -16,13 +16,13 @@ router.get("/notes", fetchuser, async (req, res) => {
 });
 
 //ROUTE 2 - Notes for user : POST "/api/jobtracker/notes/:id
-router.post("/notes/:id", fetchuser, async (req, res) => {
-  const { title, descriptions } = req.body;
-  console.log(req.user.id);
+router.post("/addNotes", fetchuser, async (req, res) => {
+  const { title, descriptions, color } = req.body;
   const userdet = new NotesUser({
     user: req.user.id,
     title,
     descriptions,
+    color,
   });
   const savedPost = await userdet.save();
   res.json(savedPost);
@@ -30,7 +30,7 @@ router.post("/notes/:id", fetchuser, async (req, res) => {
 
 //ROUTE 3 - Notes for user : PUT "/api/jobtracker/updateNote/:id"
 router.put("/updateNote/:id", fetchuser, async (req, res) => {
-  const { title, descriptions } = req.body;
+  const { title, descriptions, color } = req.body;
 
   console.log(req.body);
   try {
@@ -43,7 +43,9 @@ router.put("/updateNote/:id", fetchuser, async (req, res) => {
     if (descriptions) {
       newNote.descriptions = descriptions;
     }
-
+    if (color) {
+      newNote.color = color;
+    }
     let noteupdate = await NotesUser.findById(req.params.id);
     console.log(noteupdate);
     if (!noteupdate) {

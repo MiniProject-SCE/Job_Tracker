@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import ContactEdit from "../ContactEdit/ContactEdit";
 import "./ContactCard.css";
-export default function ContactCard() {
+export default function ContactCard(props) {
+  const contact = props.data;
   const [isModalOpen, setModalOpen] = useState(false);
+  console.log(contact)
   return (
+    
     <div>
       <div className={`bg-white-500 rounded shadow border p-6 w-64 m-4`} >
       <div  onClick={() => setModalOpen(true)}>
-      <h5 className="text-3xl font-bold mb-4 mt-0">Contact name</h5>
-        <p className="text-gray-700 text-sm m-2">Designation</p>
-        <p className="text-gray-700 text-sm m-2">Email</p>
-        <p className="text-gray-700 text-sm m-2">mobile</p>
+      <h5 className="text-3xl font-bold mb-4 mt-0">{contact.name? contact.name: null}</h5>
+        <p className="text-gray-700 text-sm m-2">{contact.designation? contact.designation: null}</p>
+        <p className="text-gray-700 text-sm m-2">{contact.email? contact.email: null}</p>
+        <p className="text-gray-700 text-sm m-2">{contact.phoneno? contact.phoneno: null}</p>
       </div>
+
         <div className="flex">
+        <a href="http://linkedin.com">
           <svg
             className="w-6 h-6 m-4 text-blue-500 fill-current"
             xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +25,8 @@ export default function ContactCard() {
           >
             <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
           </svg>
-          <a href="linkedin.com">
+          </a>
+          <a href="http://github.com ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6 m-4 fill-current"

@@ -7,20 +7,25 @@ const InputBox = ({ title, type = "text", value, name, textHandler }) => {
       {title === "Description" || title === "Address" || title === "About" ? (
         <textarea
           rows={5}
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white resize rounded-md"
+          value={value || ""}
+          name={name}
+          placeholder={title}
+          onChange={textHandler}
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white resize rounded-md"
         ></textarea>
       ) : (
         <input
           className="appearance-none block w-full bg-gray-200 text-gray-700 border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           type={type}
-          value={value}
+          value={value || ""}
           name={name}
           placeholder={title}
           onChange={textHandler}
         />
       )}
-
-      {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
+      {name === "company" || title === "Title" || name === "name" || title === "Job Title"  ? (
+        <p class="text-red-500 text-xs italic m-2">Please fill out this field.</p>
+      ) : null}
     </div>
   );
 };
