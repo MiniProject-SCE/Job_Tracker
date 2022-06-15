@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import Button from "../../../components/Button";
 import axios from "axios";
-import "./NoteAdd.css";
+import "./NoteEdit.css";
 import InputBox from "../../../components/InputBox";
-export default function NoteAdd(props) {
+export default function NoteEdit(props) {
   const [inputs, setInputs] = useState({});
-
+  const noteData = props.data;
   const handleChange = (e) =>
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  function NotesPost() {
+  function NotesUpdate() {
     axios
       .post(
-        "http://localhost:5000/api/jobtracker/addNotes",
+        `http://localhost:5000/api/jobtracker/updateNote/${noteData._id}`,
         inputs,
         {
           headers: {
@@ -30,10 +30,9 @@ export default function NoteAdd(props) {
         window.location.reload();
       });
   }
-  console.log(inputs);
   return (
     <Modal
-      className="noteAdd"
+      className="noteEdit"
       isOpen={true}
       onRequestClose={() => props.setModalOpen(false)}
       ariaHideApp={false}
@@ -48,7 +47,7 @@ export default function NoteAdd(props) {
             title="Title"
             type="text"
             name="title"
-            value={inputs.title}
+            value={inputs.title ? inputs.title : noteData.title}
             textHandler={handleChange}
           />
         </div>
@@ -57,7 +56,9 @@ export default function NoteAdd(props) {
             title="Description"
             name="description"
             rows={10}
-            value={inputs.description}
+            value={
+              inputs.description ? inputs.description : noteData.description
+            }
             type="text"
             textHandler={handleChange}
           />
@@ -126,7 +127,7 @@ export default function NoteAdd(props) {
           <Button name="Cancel" onClick={() => props.setModalOpen(false)} />
         </div>
         <div className="m-5">
-          <Button name="Submit" onClick={() => NotesPost()} />
+          <Button name="Submit" onClick={() => NotesUpdate()} />
         </div>
       </div>
     </Modal>

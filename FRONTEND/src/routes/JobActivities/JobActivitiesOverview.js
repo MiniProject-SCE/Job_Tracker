@@ -10,8 +10,12 @@ const categories = ["Wishlist", "Applied", "Rejected"];
 
 export default function JobActivitiesOverview() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [select, setSelect] = useState();
   const [jobApplications, setJobApplications] = useState([]);
 
+    const handleChange = (e) =>{
+      setSelect(e.target.value) 
+    }
   useEffect(() => {
     const fetchData = async () => {
       await axios
@@ -40,7 +44,15 @@ export default function JobActivitiesOverview() {
         >
           + Add Job
         </button>
-        <SelectInputBox title="Category" data={categories} />
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <SelectInputBox
+              title="Category"
+              name="category"
+              data={categories}
+              value = {select}
+              textHandler={handleChange}
+            />
+          </div>
         <div className="flex flex-wrap">
           {jobApplications.map((job) => (
             <JobActivityCard data={job} key={job._id} />

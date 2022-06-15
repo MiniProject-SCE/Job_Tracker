@@ -1,12 +1,12 @@
-const InputBox = ({ title, type = "text", value, name, textHandler }) => {
+const InputBox = ({ title, type = "text", value, name, textHandler, rows }) => {
   return (
-    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+    <div>
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
         {title}
       </label>
       {title === "Description" || title === "Address" || title === "About" ? (
         <textarea
-          rows={5}
+          rows={rows ? rows : 5}
           value={value || ""}
           name={name}
           placeholder={title}
@@ -23,8 +23,13 @@ const InputBox = ({ title, type = "text", value, name, textHandler }) => {
           onChange={textHandler}
         />
       )}
-      {name === "company" || title === "Title" || name === "name" || title === "Job Title"  ? (
-        <p class="text-red-500 text-xs italic m-2">Please fill out this field.</p>
+      {name === "company" ||
+      title === "Title" ||
+      name === "name" ||
+      title === "Job Title" ? (
+        <p className="text-red-500 text-xs italic m-2">
+          Please fill out this field.
+        </p>
       ) : null}
     </div>
   );

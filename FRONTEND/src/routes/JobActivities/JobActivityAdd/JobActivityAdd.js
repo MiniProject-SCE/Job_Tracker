@@ -15,23 +15,12 @@ export default function JobActivityAdd(props) {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+
   function JobPost() {
     axios
       .post(
         "http://localhost:5000/api/jobtracker/addApplication",
-        {
-          company: inputs.company,
-          salary: inputs.salary,
-          title: inputs.jobtitle,
-          description: inputs.description,
-          usernameUsed: inputs.Wusername,
-          pwdUsed: inputs.Wpassword,
-          deadLine: inputs.deadline,
-          interviewDate: inputs.interview,
-          category: inputs.Wusername,
-          location: inputs.location,
-          urlUsed: inputs.websiteUrl,
-        },
+      inputs,
         {
           headers: {
             "Content-Type": "application/json",
@@ -45,6 +34,7 @@ export default function JobActivityAdd(props) {
         window.location.reload();
       });
   }
+  console.log(inputs)
   return (
     <Modal
       className="jobAdd"
@@ -58,86 +48,121 @@ export default function JobActivityAdd(props) {
           Job Details
         </h1>
         <div className="inputboxes m-7 ">
-          <InputBox
-            title="Company"
-            name="company"
-            value={inputs.company}
-            type="text"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Job Title"
-            name="jobtitle"
-            value={inputs.jobtitle}
-            type="text"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Salary"
-            name="salary"
-            value={inputs.salary}
-            type="text"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Location"
-            name="location"
-            value={inputs.location}
-            type="text"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Deadline"
-            name="deadline"
-            value={inputs.deadline}
-            type="date"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Interview"
-            name="interview"
-            value={inputs.interview}
-            type="date"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Website Url"
-            name="websiteUrl"
-            value={inputs.websiteUrl}
-            type="text"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Website's UserName"
-            name="Wusername"
-            value={inputs.Wusername}
-            type="text"
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Website's Password"
-            type="text"
-            name="Wpassword"
-            value={inputs.Wpassword}
-            textHandler={handleChange}
-          />
-          <SelectInputBox
-            title="Category"
-            name="category"
-            data={categories}
-            textHandler={handleChange}
-          />
-          <InputBox
-            title="Description"
-            name="description"
-            value={inputs.description}
-            type="text"
-            textHandler={handleChange}
-          />
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Company"
+              name="company"
+              value={inputs.company}
+              type="text"
+              textHandler={handleChange}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Job Title"
+              name="title"
+              value={inputs.title}
+              type="text"
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Salary"
+              name="salary"
+              value={inputs.salary}
+              type="text"
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Location"
+              name="location"
+              value={inputs.location}
+              type="text"
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Deadline"
+              name="deadline"
+              value={inputs.deadline}
+              type="date"
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Interview"
+              name="interviewDate"
+              value={inputs.interviewDate}
+              type="date"
+              textHandler={handleChange}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Website Url"
+              name="urlUsed"
+              value={inputs.urlUsed}
+              type="text"
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Website's UserName"
+              name="usernameUsed"
+              value={inputs.usernameUsed}
+              type="text"
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Website's Password"
+              type="text"
+              name="pwdUsed"
+              value={inputs.pwdUsed}
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <SelectInputBox
+              title="Category"
+              name="category"
+              data={categories}
+              value={inputs.category}
+              textHandler={handleChange}
+            />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Description"
+              name="description"
+              value={inputs.description}
+              type="text"
+              textHandler={handleChange}
+            />
+          </div>
         </div>
         <div className="buttons">
-          <Button name="Cancel" onClick={() => props.setModalOpen(false)} />
-          <Button name="Submit" onClick={() => JobPost()} />
+          <div className="m-5">
+            <Button name="Cancel" onClick={() => props.setModalOpen(false)} />
+          </div>
+          <div className="m-5">
+            <Button name="Submit" onClick={() => JobPost()} />
+          </div>
         </div>
       </div>
     </Modal>

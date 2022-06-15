@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import bg from "../assets/img/19873.jpg";
-import Navbar from "../components/Navbar.js";
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,9 +13,6 @@ export default function Login() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-    console.log("email:" + credentials.email);
-    console.log("password:" + credentials.password);
     let url = "http://localhost:5000/api/auth/loginuser";
     let options = {
       method: "POST",

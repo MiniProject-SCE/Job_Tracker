@@ -1,35 +1,39 @@
-import React, { useState,useEffect } from "react";
-import bg from "../../assets/img/19873.jpg"
+import React, { useState, useEffect } from "react";
+import bg from "../../assets/img/19873.jpg";
 import Navbar from "../../components/Navbar";
-import ProfileAdd from "./ProfileEdit/ProfileEdit";
+import ProfileEdit from "./ProfileEdit/ProfileEdit";
 import axios from "axios";
 export default function Profile() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [profile, setProfile] = useState();
-
+console.log(profile)
   useEffect(() => {
-      const fetchData = async () => {
-          await axios
-              .get('http://localhost:5000/api/jobtracker/getUser')
-              .then((res) => {
-                setProfile(res.data);
-              })
-              .catch((err) => {
-                  console.log(err);
-              });
-      };
-      fetchData();
+    const fetchData = async () => {
+      await axios
+        .get("http://localhost:5000/api/jobtracker/getUser", {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          setProfile(...res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
   }, []);
   return (
     <>
       <Navbar transparent />
-      <main className="profile-page">
+      {/* <main className="profile-page">
         <section className="relative block" style={{ height: "500px" }}>
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
             style={{
-              backgroundImage:
-                `url(${bg})`,
+              backgroundImage: `url(${bg})`,
             }}
           >
             <span
@@ -88,10 +92,10 @@ export default function Profile() {
                 </div>
                 <div className="text-center mt-12">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                    Jenna Stones
+                    {profile.name ? profile.name : ""}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase flex justify-center">
-                    Los Angeles, California
+                    {profile.location ? profile.location : ""}
                   </div>
                   <div className="mb-2 text-gray-700 mt-10  flex justify-center mb-4">
                     <svg
@@ -108,7 +112,7 @@ export default function Profile() {
                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
-                    designation
+                    {profile.designation ? profile.designation : ""}
                   </div>
 
                   <div className="mb-2 text-gray-700  flex justify-center mb-4">
@@ -128,7 +132,7 @@ export default function Profile() {
                         d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
                       />
                     </svg>
-                    working
+                    {profile.working ? profile.working : ""}
                   </div>
                   <div className="mb-2 text-gray-700  flex justify-center mb-4">
                     <svg
@@ -145,7 +149,7 @@ export default function Profile() {
                         d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
                       />
                     </svg>
-                    email
+                    {profile.email ? profile.email : ""}
                   </div>
                   <div className="mb-2 text-gray-700  flex justify-center ">
                     <svg
@@ -162,20 +166,15 @@ export default function Profile() {
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
-                    mobile
+                    {profile.mobileno ? profile.mobileno : ""}
                   </div>
                 </div>
                 <div className="mt-10 py-10 border-t border-gray-300 text-center">
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        An artist of considerable range, Jenna the name taken by
-                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                        performs and records all of his own music, giving it a
-                        warm, intimate feel with a solid groove structure. An
-                        artist of considerable range.
+                        {profile.description ? profile.description : ""}
                       </p>
-                    
                     </div>
                   </div>
                 </div>
@@ -183,8 +182,8 @@ export default function Profile() {
             </div>
           </div>
         </section>
-        {isModalOpen ? <ProfileAdd setModalOpen={setModalOpen} /> : null}
-      </main>
+        {isModalOpen ? <ProfileEdit setModalOpen={setModalOpen} /> : null}
+      </main> */}
     </>
   );
 }

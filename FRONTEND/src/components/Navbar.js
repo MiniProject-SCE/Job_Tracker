@@ -1,7 +1,17 @@
-import React from "react";
-import { HashLink } from 'react-router-hash-link';
+import React, { useState } from "react";
+import { HashLink } from "react-router-hash-link";
+
+import { useNavigate } from "react-router-dom";
+import Button from "./Button";
+
 export default function Navbar(props) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
   return (
     <>
       <nav
@@ -45,88 +55,90 @@ export default function Navbar(props) {
           >
             <ul className="flex flex-col lg:flex-row list-none mr-auto">
               <li className="flex items-center">
-           
-                  
-                  <HashLink
-                        className={
+                <HashLink
+                  className={
                     (props.transparent
                       ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                        scroll={(el) => el.scrollIntoView({ behavior: 'smooth' })}
-                        to={'/#feedback'}
-                    >
-                        <i
+                  scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}
+                  to={"/#feedback"}
+                >
+                  <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
                       " far fa-file-alt text-lg leading-lg mr-2"
                     }
-                  /> Contact us
-                    </HashLink>
+                  />{" "}
+                  Contact us
+                </HashLink>
               </li>
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-            <li className="flex items-center">
+              <li className="flex items-center">
                 <a
-                    className={
+                  className={
                     (props.transparent
                       ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                  href = "/activities"
-                    >
-                        <i
+                  href="/activities"
+                >
+                  <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
                       " far fa-file-alt text-lg leading-lg mr-2"
                     }
-                  /> Activities
-                </a>
-              </li>
-            <li className="flex items-center">
-                <a
-                    className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href = "/documents"
-                    >
-                        <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " far fa-file-alt text-lg leading-lg mr-2"
-                    }
-                  /> Documents
+                  />{" "}
+                  Activities
                 </a>
               </li>
               <li className="flex items-center">
                 <a
-                    className={
+                  className={
                     (props.transparent
                       ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                  href = "/notes"
-                    >
-                        <i
+                  href="/documents"
+                >
+                  <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
                       " far fa-file-alt text-lg leading-lg mr-2"
                     }
-                  /> Notes
+                  />{" "}
+                  Documents
+                </a>
+              </li>
+              <li className="flex items-center">
+                <a
+                  className={
+                    (props.transparent
+                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                      : "text-gray-800 hover:text-gray-600") +
+                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                  }
+                  href="/notes"
+                >
+                  <i
+                    className={
+                      (props.transparent
+                        ? "lg:text-gray-300 text-gray-500"
+                        : "text-gray-500") +
+                      " far fa-file-alt text-lg leading-lg mr-2"
+                    }
+                  />{" "}
+                  Notes
                 </a>
               </li>
 
@@ -148,46 +160,51 @@ export default function Navbar(props) {
                       " far fa-file-alt text-lg leading-lg "
                     }
                   />
-                   Contacts
+                  Contacts
                 </a>
               </li>
               <li className="flex items-center">
                 <a
-                    className={
+                  className={
                     (props.transparent
                       ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
                       : "text-gray-800 hover:text-gray-600") +
                     " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                   }
-                  href = "/profile"
-                    >
-                        <i
+                  href="/profile"
+                >
+                  <i
                     className={
                       (props.transparent
                         ? "lg:text-gray-300 text-gray-500"
                         : "text-gray-500") +
                       " far fa-file-alt text-lg leading-lg mr-2"
                     }
-                  /> Profile
+                  />{" "}
+                  Profile
                 </a>
               </li>
-           
 
               <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "bg-white text-gray-800 active:bg-gray-100"
-                      : "bg-pink-500 text-white active:bg-pink-600") +
-                    " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
-                  }
-                  type="button"
-                  style={{ transition: "all .15s ease" }}
-                  href ="/login"
-                >
-                  <i className="fas fa-arrow-alt-circle-down"></i> Login
-                </a>
-             
+                {token ? (
+                  <div className="m-2">
+                    <Button name="Logout" onClick={() => logout()} />
+                  </div>
+                ) : (
+                  <a
+                    className={
+                      (props.transparent
+                        ? "bg-white text-gray-800 active:bg-gray-100"
+                        : "bg-pink-500 text-white active:bg-pink-600") +
+                      " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+                    }
+                    type="button"
+                    style={{ transition: "all .15s ease" }}
+                    href="/login"
+                  >
+                    <i className="fas fa-arrow-alt-circle-down"></i> Login
+                  </a>
+                )}
               </li>
             </ul>
           </div>
