@@ -39,16 +39,10 @@ router.post(
   [
     // body("dob", "Enter a valid DateofBirth").isDate(),
     body("name", "Enter a valid Name").isLength({ min: 3 }),
-    body("mobileno", "Enter a valid mobile").isLength({ min: 10 }),
-    body("designation", "Enter a valid designation").isLength({ min: 3 }),
-    body("working", "Enter a valid working").isLength({ min: 3 }),
-    body("about", "Enter a valid About").isLength({ min: 3 }),
   ],
   async (req, res) => {
     try {
-      console.log("hai");
-      console.log(req.user.id);
-      const { name, mobileno, designation, working, about } = req.body;
+      const { name, mobileno, designation, working, about,location } = req.body;
       //if there are errors, return bad request
       const errors = validationResult(req);
 
@@ -63,6 +57,7 @@ router.post(
         designation,
         working,
         about,
+        location,
       });
 
       console.log(userdet);
@@ -79,7 +74,7 @@ router.post(
 
 //ROUTE 3 - Logged in  user details updating details : GET "/api/jobtracker/updateuser.LOGIN REQUIRED
 router.put("/updateuser/:id", fetchuser, async (req, res) => {
-  const { name, mobileno, designation, working, about } = req.body;
+  const { name, mobileno, designation, working, about,location } = req.body;
 
   console.log(req.body);
   try {
@@ -97,6 +92,9 @@ router.put("/updateuser/:id", fetchuser, async (req, res) => {
     }
     if (working) {
       newUser.working = working;
+    }
+    if (location) {
+      newUser.location = location;
     }
     if (about) {
       newUser.about = about;

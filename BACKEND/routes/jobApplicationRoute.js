@@ -38,7 +38,7 @@ router.post(
         location,
         urlUsed,
       } = req.body;
-
+      
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -83,7 +83,7 @@ router.put("/updateApplication/:id", fetchuser, async (req, res) => {
     location,
     urlUsed,
   } = req.body;
-
+  console.log(req.body);
   try {
     //Create a newUser object
     const newApplication = {};

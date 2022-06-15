@@ -1,5 +1,5 @@
 {
-  "name": "healthtracker-backend",
+  "name": "jobtracker-backend",
   "version": "1.0.0",
   "description": "This is used to track the health and prepare reports",
   "main": "index.js",

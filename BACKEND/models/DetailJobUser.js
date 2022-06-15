@@ -12,23 +12,22 @@ const DetailJobUserSchema = new Schema({
   },
   mobileno: {
     type: String,
-    required: true,
   },
   designation: {
     type: String,
-    required: true,
   },
   working: {
     type: String,
-    required: true,
   },
   about: {
     type: String,
-    required: true,
   },
   date: {
     type: Date,
     default: Date.now,
+  },
+  location: {
+    type: String,
   },
   file: {
     type: String,
