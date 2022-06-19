@@ -46,6 +46,15 @@ export default function ContactEdit(props) {
         <div className="inputboxes m-7">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <InputBox
+              title="Name"
+              type="text"
+              name="name"
+              value={inputs.name ? inputs.name : contactInfo.name}
+              textHandler={handleChange}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
               title="Designation"
               type="text"
               name="designation"

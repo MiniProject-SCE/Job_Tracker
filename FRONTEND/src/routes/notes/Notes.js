@@ -40,8 +40,10 @@ export default function Notes() {
         </button>
       </div>
       <div className="flex flex-wrap">
-        {myNotes.map((note) => (
-          <NotesCard note={note} />
+        {myNotes.map((note,key) => (
+          <div className="m-5" key = {key}>
+          <NotesCard note={note}  />
+          </div>
         ))}
       </div>
 

@@ -55,9 +55,9 @@ export default function NoteAdd(props) {
         <div className="w-full ">
           <InputBox
             title="Description"
-            name="description"
+            name="descriptions"
             rows={10}
-            value={inputs.description}
+            value={inputs.descriptions}
             type="text"
             textHandler={handleChange}
           />
@@ -99,7 +99,7 @@ export default function NoteAdd(props) {
           <input
             type="radio"
             name="color"
-            value="blue"
+            value="sky"
             id="color4"
             onChange={handleChange}
           />

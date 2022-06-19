@@ -12,9 +12,9 @@ export default function NoteEdit(props) {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  function NotesUpdate() {
+  function NoteUpdate() {
     axios
-      .post(
+      .put(
         `http://localhost:5000/api/jobtracker/updateNote/${noteData._id}`,
         inputs,
         {
@@ -25,7 +25,7 @@ export default function NoteEdit(props) {
         }
       )
       .then(() => {
-        window.alert("Note Added Successfully");
+        window.alert("Note Updated Successfully");
         props.setModalOpen(false);
         window.location.reload();
       });
@@ -54,10 +54,10 @@ export default function NoteEdit(props) {
         <div className="w-full ">
           <InputBox
             title="Description"
-            name="description"
+            name="descriptions"
             rows={10}
             value={
-              inputs.description ? inputs.description : noteData.description
+              inputs.descriptions ? inputs.descriptions : noteData.descriptions
             }
             type="text"
             textHandler={handleChange}
@@ -100,7 +100,7 @@ export default function NoteEdit(props) {
           <input
             type="radio"
             name="color"
-            value="blue"
+            value="sky"
             id="color4"
             onChange={handleChange}
           />
@@ -127,7 +127,7 @@ export default function NoteEdit(props) {
           <Button name="Cancel" onClick={() => props.setModalOpen(false)} />
         </div>
         <div className="m-5">
-          <Button name="Submit" onClick={() => NotesUpdate()} />
+          <Button name="Submit" onClick={() => NoteUpdate()} />
         </div>
       </div>
     </Modal>

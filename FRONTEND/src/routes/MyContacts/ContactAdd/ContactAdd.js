@@ -14,16 +14,12 @@ export default function ContactAdd(props) {
     }));
   function ContactPost() {
     axios
-      .post(
-        "http://localhost:5000/api/jobtracker/addContact",
-      inputs,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("token"),
-          },
-        }
-      )
+      .post("http://localhost:5000/api/jobtracker/addContact", inputs, {
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      })
       .then(() => {
         window.alert("Contact Added Successfully");
         props.setModalOpen(false);
@@ -43,6 +39,15 @@ export default function ContactAdd(props) {
           Contact Details
         </h1>
         <div className="inputboxes m-7">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <InputBox
+              title="Name"
+              type="text"
+              name="name"
+              value={inputs.name}
+              textHandler={handleChange}
+            />
+          </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <InputBox
               title="Designation"

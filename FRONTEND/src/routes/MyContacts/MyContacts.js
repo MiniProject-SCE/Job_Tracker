@@ -26,7 +26,7 @@ export default function MyContacts() {
     };
     fetchData();
   }, []);
-  
+
   return (
     <div>
       <Navbar />
@@ -39,7 +39,9 @@ export default function MyContacts() {
         </button>
         <div className="flex flex-wrap">
           {myContacts.map((contact) => (
-            <ContactCard data={contact} />
+            <div className="m-5">
+              <ContactCard data={contact} />
+            </div>
           ))}
         </div>
       </div>
