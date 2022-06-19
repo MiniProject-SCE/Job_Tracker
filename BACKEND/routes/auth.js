@@ -28,7 +28,6 @@ router.post(
     //check whether the user with this email exists already
     try {
       let jobuser = await Doctor.findOne({ email: req.body.email });
-      // console.log(user);
       if (jobuser) {
         return res
           .status(400)
@@ -109,9 +108,7 @@ router.post(
 //ROUTE 3 - Logged in  user details retrieval using : POST "/api/auth/getuser.
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
-    // console.log("success in id")
     const jobUserId = req.user.id;
-    // console.log(doctorId);
     const jobUser = await Doctor.findById(jobUserId).select("-password");
     res.send(jobUserId);
   } catch (error) {

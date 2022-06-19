@@ -83,7 +83,6 @@ router.put("/updateApplication/:id", fetchuser, async (req, res) => {
     location,
     urlUsed,
   } = req.body;
-  console.log(req.body);
   try {
     //Create a newUser object
     const newApplication = {};
@@ -123,9 +122,9 @@ router.put("/updateApplication/:id", fetchuser, async (req, res) => {
     }
     //Find the userdetail to be updated and update it
     //Always validate the user and update which is done below
-    console.log(req.params.id);
+
     let applicationupdate = await ApplicationJobUser.findById(req.params.id);
-    console.log(applicationupdate);
+
     if (!applicationupdate) {
       return req.status(404).send("Not Found");
     }

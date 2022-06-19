@@ -12,9 +12,8 @@ const { body, validationResult } = require("express-validator");
 
 router.get("/fetchuserdetails", fetchuser, async (req, res) => {
   try {
-    const detailuser = await DetailJobUser.find({ user: req.users.id });
-
-    res.json([detailuser]);
+    const detailuser = await DetailJobUser.find({ user: req.user.id });
+    res.json(detailuser);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");
@@ -23,9 +22,10 @@ router.get("/fetchuserdetails", fetchuser, async (req, res) => {
 
 //To fetch all user list without authentication
 router.get("/getUser", async (req, res) => {
+
   try {
     const detailuser = await DetailJobUser.find();
-
+    
     res.json([detailuser]);
   } catch (error) {
     console.error(error.message);
@@ -42,7 +42,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { name, mobileno, designation, working, about,location } = req.body;
+      const { name, mobileno, designation, working, about,location,email } = req.body;
       //if there are errors, return bad request
       const errors = validationResult(req);
 
@@ -58,9 +58,8 @@ router.post(
         working,
         about,
         location,
+        email
       });
-
-      console.log(userdet);
 
       const saveduser = await userdet.save();
 
@@ -74,9 +73,8 @@ router.post(
 
 //ROUTE 3 - Logged in  user details updating details : GET "/api/jobtracker/updateuser.LOGIN REQUIRED
 router.put("/updateuser/:id", fetchuser, async (req, res) => {
-  const { name, mobileno, designation, working, about,location } = req.body;
+  const { name, mobileno, designation, working, about,location,email } = req.body;
 
-  console.log(req.body);
   try {
     //Create a newUser object
     const newUser = {};
@@ -93,6 +91,9 @@ router.put("/updateuser/:id", fetchuser, async (req, res) => {
     if (working) {
       newUser.working = working;
     }
+    if (email) {
+      newUser.email = email;
+    }
     if (location) {
       newUser.location = location;
     }
@@ -101,9 +102,7 @@ router.put("/updateuser/:id", fetchuser, async (req, res) => {
     }
     //Find the userdetail to be updated and update it
     //Always validate the user and update which is done below
-    console.log(req.params.id);
     let userupdate = await DetailJobUser.findById(req.params.id);
-    console.log(userupdate);
     if (!userupdate) {
       return req.status(404).send("Not Found");
     }

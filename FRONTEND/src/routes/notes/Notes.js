@@ -27,7 +27,6 @@ export default function Notes() {
     fetchData();
   }, []);
 
-  console.log(myNotes);
   return (
     <div>
       <Navbar />

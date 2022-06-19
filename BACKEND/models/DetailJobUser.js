@@ -8,12 +8,14 @@ const DetailJobUserSchema = new Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   mobileno: {
     type: String,
   },
   designation: {
+    type: String,
+  },
+  email:{
     type: String,
   },
   working: {

@@ -36,7 +36,6 @@ export default function Login() {
       response.statusText === "Bad Request";
     if (responseOK) {
       let data = await response.data;
-      console.log("data is :" + data.authtoken);
       localStorage.setItem("token", data.authtoken);
       navigate("/activities");
     }

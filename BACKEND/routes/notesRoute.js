@@ -31,8 +31,6 @@ router.post("/addNotes", fetchuser, async (req, res) => {
 //ROUTE 3 - Notes for user : PUT "/api/jobtracker/updateNote/:id"
 router.put("/updateNote/:id", fetchuser, async (req, res) => {
   const { title, descriptions, color } = req.body;
-
-  console.log(req.body);
   try {
     //Create a newUser object
     const newNote = {};
@@ -47,7 +45,6 @@ router.put("/updateNote/:id", fetchuser, async (req, res) => {
       newNote.color = color;
     }
     let noteupdate = await NotesUser.findById(req.params.id);
-    console.log(noteupdate);
     if (!noteupdate) {
       return req.status(404).send("Not Found");
     }

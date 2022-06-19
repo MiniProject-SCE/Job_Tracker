@@ -5,12 +5,12 @@ import ProfileEdit from "./ProfileEdit/ProfileEdit";
 import axios from "axios";
 export default function Profile() {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [profile, setProfile] = useState();
-console.log(profile)
+  const [profile, setProfile] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("http://localhost:5000/api/jobtracker/getUser", {
+        .get("http://localhost:5000/api/jobtracker/fetchuserdetails", {
           headers: {
             "Content-Type": "application/json",
             "auth-token": localStorage.getItem("token"),
@@ -28,7 +28,7 @@ console.log(profile)
   return (
     <>
       <Navbar transparent />
-      {/* <main className="profile-page">
+      <main className="profile-page">
         <section className="relative block" style={{ height: "500px" }}>
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -182,8 +182,8 @@ console.log(profile)
             </div>
           </div>
         </section>
-        {isModalOpen ? <ProfileEdit setModalOpen={setModalOpen} /> : null}
-      </main> */}
+        {isModalOpen ? <ProfileEdit setModalOpen={setModalOpen} data = {profile} /> : null}
+      </main>
     </>
   );
 }

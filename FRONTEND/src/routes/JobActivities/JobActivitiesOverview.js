@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import JobActivityCard from "./JobActivityCard/JobActivityCard";
-import JobActivityEdit from "./JobActivityEdit/JobActivityEdit";
 import JobActivityAdd from "./JobActivityAdd/JobActivityAdd";
 import Navbar from "../../components/Navbar";
 import SelectInputBox from "../../components/SelectInputBox";

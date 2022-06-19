@@ -1,10 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bg from "../assets/img/19873.jpg"
+import bg from "../assets/img/19873.jpg";
 // import Navbar from "../components/Navbar.js";
 export default function Login() {
-  const [credentials, setCredentials] = useState({ name:"", email: "", password: "" ,repassword:""});
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+    repassword: "",
+  });
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -15,7 +20,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let url = "http://localhost:5000/api/auth/createuser";
-    if(credentials.password === credentials.repassword){
+    if (credentials.password === credentials.repassword) {
       let options = {
         method: "POST",
         url: url,
@@ -38,36 +43,53 @@ export default function Login() {
         response.statusText === "Bad Request";
       if (responseOK) {
         let data = await response.data;
-        console.log("data is :" + data.authtoken);
+
         localStorage.setItem("token", data.authtoken);
         navigate("/activities");
+        if (localStorage.getItem("token")) {
+          await axios.post(
+            "http://localhost:5000/api/jobtracker/adduser",
+            {
+              name: credentials.name,
+              mobileno: "",
+              designation: "",
+              working: "",
+              about: "",
+              location: "",
+              email:""
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("token"),
+              },
+            }
+          );
+        }
       }
       if (responseNotOK) {
         alert("Invalid credentials");
       }
-    }else{
-      alert("Enter the correct password")
+    } else {
+      alert("Enter the correct password");
     }
-    
-  }
+  };
 
   return (
     <>
       {/* <Navbar transparent /> */}
       <main>
         <section className="absolute w-full h-full">
-        <div
+          <div
             className=" absolute w-full h-full opacity-00 bg-gray-900"
             style={{
-              backgroundImage:
-                `url(${bg})`,
+              backgroundImage: `url(${bg})`,
               backgroundSize: "100%",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
-              
             }}
           >
-             <span
+            <span
               id="blackOverlay"
               className="w-full h-full absolute opacity-75 bg-black"
             ></span>
@@ -76,19 +98,16 @@ export default function Login() {
             <div className="flex content-center items-center justify-center h-full">
               <div className="w-full lg:w-5/12 px-4">
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
-                <div className="rounded-t mb-0 px-6 py-6">
+                  <div className="rounded-t mb-0 px-6 py-6">
                     <div className="text-center mb-3">
                       <h6 className="text-gray-600 text-sm font-bold">
                         {/* Sign up with */}
                       </h6>
                     </div>
-                   
-                
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                   
                     <form onSubmit={handleSubmit}>
-                    <div className="relative w-full mb-3">
+                      <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
@@ -111,7 +130,7 @@ export default function Login() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                        Email
+                          Email
                         </label>
                         <input
                           type="email"
@@ -171,13 +190,9 @@ export default function Login() {
                         >
                           Register
                         </button>
-                        <a
-                      href="/Login"
-                      
-                      className="text-Black-300 font-bold "
-                    >
-                      Already have an account? Login
-                    </a>
+                        <a href="/Login" className="text-Black-300 font-bold ">
+                          Already have an account? Login
+                        </a>
                       </div>
                     </form>
                   </div>

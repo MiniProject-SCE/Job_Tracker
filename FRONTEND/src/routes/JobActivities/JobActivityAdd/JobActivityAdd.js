@@ -34,7 +34,6 @@ export default function JobActivityAdd(props) {
         window.location.reload();
       });
   }
-  console.log(inputs)
   return (
     <Modal
       className="jobAdd"

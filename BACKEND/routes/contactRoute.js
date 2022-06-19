@@ -75,8 +75,7 @@ router.get("/getContacts", fetchuser, async (req, res) => {
       github,
       portfolio,
     } = req.body;
-  
-    console.log(req.body);
+
     try {
       //Create a newUser object
       const newApplication = {};
@@ -106,12 +105,10 @@ router.get("/getContacts", fetchuser, async (req, res) => {
         newApplication.portfolio = portfolio;
       }
   
-      console.log("i am in");
       //Find the userdetail to be updated and update it
       //Always validate the user and update which is done below
-      console.log(req.params.id);
       let applicationupdate = await ContactJobUser.findById(req.params.id);
-      console.log(applicationupdate);
+
       if (!applicationupdate) {
         return req.status(404).send("Not Found");
       }
@@ -119,7 +116,7 @@ router.get("/getContacts", fetchuser, async (req, res) => {
         return req.status(401).send("Not Allowed");
       }
   
-      console.log("i am in 2");
+
   
       applicationupdate = await ContactJobUser.findByIdAndUpdate(
         req.params.id,
