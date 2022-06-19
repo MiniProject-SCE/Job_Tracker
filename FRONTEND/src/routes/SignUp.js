@@ -1,7 +1,56 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import bg from "../assets/img/19873.jpg"
 // import Navbar from "../components/Navbar.js";
 export default function Login() {
+  const [credentials, setCredentials] = useState({ name:"", email: "", password: "" ,repassword:""});
+
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let url = "http://localhost:5000/api/auth/createuser";
+    if(credentials.password === credentials.repassword){
+      let options = {
+        method: "POST",
+        url: url,
+        headers: {
+          // Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: {
+          name: credentials.name,
+          email: credentials.email,
+          password: credentials.password,
+        },
+      };
+      let response = await axios(options);
+      let responseOK =
+        response && response.status === 200 && response.statusText === "OK";
+      let responseNotOK =
+        response &&
+        response.status === 400 &&
+        response.statusText === "Bad Request";
+      if (responseOK) {
+        let data = await response.data;
+        console.log("data is :" + data.authtoken);
+        localStorage.setItem("token", data.authtoken);
+        navigate("/activities");
+      }
+      if (responseNotOK) {
+        alert("Invalid credentials");
+      }
+    }else{
+      alert("Enter the correct password")
+    }
+    
+  }
+
   return (
     <>
       {/* <Navbar transparent /> */}
@@ -38,7 +87,7 @@ export default function Login() {
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                    
-                    <form>
+                    <form onSubmit={handleSubmit}>
                     <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -50,6 +99,10 @@ export default function Login() {
                           type="text"
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Full Name"
+                          value={credentials.name}
+                          onChange={onChange}
+                          id="name"
+                          name="name"
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
@@ -64,6 +117,10 @@ export default function Login() {
                           type="email"
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Email"
+                          value={credentials.email}
+                          onChange={onChange}
+                          id="email"
+                          name="email"
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
@@ -78,6 +135,10 @@ export default function Login() {
                           type="password"
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Password"
+                          value={credentials.password}
+                          onChange={onChange}
+                          name="password"
+                          id="password"
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
@@ -93,6 +154,10 @@ export default function Login() {
                           type="password"
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                           placeholder="Password"
+                          value={credentials.repassword}
+                          onChange={onChange}
+                          name="repassword"
+                          id="repassword"
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
@@ -100,7 +165,8 @@ export default function Login() {
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                          type="button"
+                          type="submit"
+                          value="register"
                           style={{ transition: "all .15s ease" }}
                         >
                           Register

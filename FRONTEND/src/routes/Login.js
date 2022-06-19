@@ -6,10 +6,11 @@ import axios from "axios";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  
   const onChange = (e) => {
-    console.log(e.target.value);
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +39,9 @@ export default function Login() {
       console.log("data is :" + data.authtoken);
       localStorage.setItem("token", data.authtoken);
       navigate("/activities");
+    }
+    if (responseNotOK) {
+      alert("Invalid credentials");
     }
   };
   return (
