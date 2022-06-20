@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  
+
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -37,6 +37,7 @@ export default function Login() {
     if (responseOK) {
       let data = await response.data;
       localStorage.setItem("token", data.authtoken);
+      localStorage.setItem("isAuth", true);
       navigate("/activities");
     }
     if (responseNotOK) {

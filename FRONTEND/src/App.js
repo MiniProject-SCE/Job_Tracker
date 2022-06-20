@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./routes/Landing.js";
 import Login from "./routes/Login.js";
@@ -8,7 +8,7 @@ import JobActivitiesOverview from "./routes/JobActivities/JobActivitiesOverview.
 import NotesApp from "./routes/notes/Notes.js";
 import MyContacts from "./routes/MyContacts/MyContacts.js";
 import Documents from "./routes/Documents/Documents.js";
-
+import ProtectedRoute from "./ProtectedRoute";
 export default function App() {
   return (
     <div>
@@ -23,7 +23,6 @@ export default function App() {
           <Route path="/notes" element={<NotesApp />} />
           <Route path="/mycontacts" element={<MyContacts />} />
           <Route path="/documents" element={<Documents />} />
-          {/* <Redirect from="/" to="/login" /> */}
         </Routes>
       </BrowserRouter>
     </div>

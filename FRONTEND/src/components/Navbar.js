@@ -10,8 +10,10 @@ export default function Navbar(props) {
   const token = localStorage.getItem("token");
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("isAuth");
     navigate("/");
   };
+  const isAuth = localStorage.getItem("isAuth");
   return (
     <>
       <nav
@@ -77,113 +79,136 @@ export default function Navbar(props) {
                 </HashLink>
               </li>
             </ul>
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="/activities"
-                >
-                  <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " far fa-file-alt text-lg leading-lg mr-2"
-                    }
-                  />{" "}
-                  Activities
-                </a>
-              </li>
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="/documents"
-                >
-                  <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " far fa-file-alt text-lg leading-lg mr-2"
-                    }
-                  />{" "}
-                  Documents
-                </a>
-              </li>
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="/notes"
-                >
-                  <i
-                    className={
-                      (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " far fa-file-alt text-lg leading-lg mr-2"
-                    }
-                  />{" "}
-                  Notes
-                </a>
-              </li>
 
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="/mycontacts"
-                >
-                  <i
+            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              {isAuth ? (
+                <li className="flex items-center">
+                  <a
                     className={
                       (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " far fa-file-alt text-lg leading-lg "
+                        ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                        : "text-gray-800 hover:text-gray-600") +
+                      " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                     }
-                  />
-                  Contacts
-                </a>
-              </li>
-              <li className="flex items-center">
-                <a
-                  className={
-                    (props.transparent
-                      ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
-                      : "text-gray-800 hover:text-gray-600") +
-                    " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                  }
-                  href="/profile"
-                >
-                  <i
+                    href="/activities"
+                  >
+                    <i
+                      className={
+                        (props.transparent
+                          ? "lg:text-gray-300 text-gray-500"
+                          : "text-gray-500") +
+                        " far fa-file-alt text-lg leading-lg mr-2"
+                      }
+                    />{" "}
+                    Activities
+                  </a>
+                </li>
+              ) : (
+                ""
+              )}
+              {isAuth ? (
+                <li className="flex items-center">
+                  <a
                     className={
                       (props.transparent
-                        ? "lg:text-gray-300 text-gray-500"
-                        : "text-gray-500") +
-                      " far fa-file-alt text-lg leading-lg mr-2"
+                        ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                        : "text-gray-800 hover:text-gray-600") +
+                      " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                     }
-                  />{" "}
-                  Profile
-                </a>
-              </li>
+                    href="/documents"
+                  >
+                    <i
+                      className={
+                        (props.transparent
+                          ? "lg:text-gray-300 text-gray-500"
+                          : "text-gray-500") +
+                        " far fa-file-alt text-lg leading-lg mr-2"
+                      }
+                    />{" "}
+                    Documents
+                  </a>
+                </li>
+              ) : (
+                ""
+              )}
+
+              {isAuth ? (
+                <li className="flex items-center">
+                  <a
+                    className={
+                      (props.transparent
+                        ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                        : "text-gray-800 hover:text-gray-600") +
+                      " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                    }
+                    href="/notes"
+                  >
+                    <i
+                      className={
+                        (props.transparent
+                          ? "lg:text-gray-300 text-gray-500"
+                          : "text-gray-500") +
+                        " far fa-file-alt text-lg leading-lg mr-2"
+                      }
+                    />{" "}
+                    Notes
+                  </a>
+                </li>
+              ) : (
+                ""
+              )}
+
+              {isAuth ? (
+                <li className="flex items-center">
+                  <a
+                    className={
+                      (props.transparent
+                        ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                        : "text-gray-800 hover:text-gray-600") +
+                      " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                    }
+                    href="/mycontacts"
+                  >
+                    <i
+                      className={
+                        (props.transparent
+                          ? "lg:text-gray-300 text-gray-500"
+                          : "text-gray-500") +
+                        " far fa-file-alt text-lg leading-lg "
+                      }
+                    />
+                    Contacts
+                  </a>
+                </li>
+              ) : (
+                ""
+              )}
+
+              {isAuth ? (
+                <li className="flex items-center">
+                  <a
+                    className={
+                      (props.transparent
+                        ? "lg:text-white lg:hover:text-gray-300 text-gray-800"
+                        : "text-gray-800 hover:text-gray-600") +
+                      " px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                    }
+                    href="/profile"
+                  >
+                    <i
+                      className={
+                        (props.transparent
+                          ? "lg:text-gray-300 text-gray-500"
+                          : "text-gray-500") +
+                        " far fa-file-alt text-lg leading-lg mr-2"
+                      }
+                    />{" "}
+                    Profile
+                  </a>
+                </li>
+              ) : (
+                ""
+              )}
 
               <li className="flex items-center">
                 {token ? (
