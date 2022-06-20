@@ -43,7 +43,7 @@ export default function JobActivitiesOverview() {
         >
           + Add Job
         </button>
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        {/* <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <SelectInputBox
             title="Category"
             name="category"
@@ -51,7 +51,7 @@ export default function JobActivitiesOverview() {
             value={select}
             textHandler={handleChange}
           />
-        </div>
+        </div> */}
         <div className="flex flex-wrap">
           {jobApplications.map((job) => (
             <div className="m-5">

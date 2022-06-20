@@ -6,7 +6,7 @@ export default function JobActivityCard(props) {
   const [isModalOpen, setModalOpen] = useState(false);
   return (
     <div className="flex flex-wrap " key={jobInfo._id}>
-      <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+      <div className="block p-6 rounded-lg shadow-lg bg-white w-max">
         <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">
           {jobInfo.title}
         </h5>
