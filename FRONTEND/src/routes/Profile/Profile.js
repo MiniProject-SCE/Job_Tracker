@@ -173,7 +173,7 @@ export default function Profile() {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        {profile.description ? profile.description : ""}
+                        {profile.about ? profile.about : ""}
                       </p>
                     </div>
                   </div>

@@ -7,7 +7,7 @@ export default function ContactCard(props) {
 
   return (
     <div>
-      <div className={`bg-white-500 rounded shadow border p-6 w-64 m-4`}>
+      <div className="bg-white-500 rounded shadow border p-6 w-max m-4">
         <div onClick={() => setModalOpen(true)}>
           <h5 className="text-3xl font-bold mb-4 mt-0">
             {contact.name ? contact.name : null}
