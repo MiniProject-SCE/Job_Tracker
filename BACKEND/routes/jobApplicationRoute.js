@@ -4,6 +4,7 @@ var fetchuser = require("../middleware/fetchuser");
 const { body, validationResult } = require("express-validator");
 const ApplicationJobUser = require("../models/Applications");
 
+
 //ROUTE 1 - GET JOB APPLICATION DETAILS "/api/jobtracker/getApplication"
 router.get("/getApplication", fetchuser, async (req, res) => {
   try {
@@ -14,6 +15,7 @@ router.get("/getApplication", fetchuser, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 //ROUTE 2 - ADD JOB APPLICATION "/api/jobtracker/addApplication"
 router.post(
